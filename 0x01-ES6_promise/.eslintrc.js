@@ -27,7 +27,8 @@ module.exports = {
     ],"import/extensions": ["error", "ignorePackages", {
       "js": "always",
       "jsx": "always",
-      null: "always"
+      null: "always",
+      "":"always"
     }]
   },
   overrides: [
