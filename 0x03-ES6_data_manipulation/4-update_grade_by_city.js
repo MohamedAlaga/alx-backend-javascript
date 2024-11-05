@@ -13,7 +13,7 @@ const updateStudentGradeByCity = (listStudents, city, newGrades) => {
       }
     });
     if (student.grade == null) {
-      student.grade = 'N/A';
+      student.grade = "N/A";
     }
     return student;
   });
