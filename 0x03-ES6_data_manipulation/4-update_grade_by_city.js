@@ -1,23 +1,18 @@
 const updateStudentGradeByCity = (listStudents, city, newGrades) => {
-  let listStudentGrades = [];
+  const listStudentGrades = [];
   if (!Array.isArray(listStudents)) {
     return listStudentGrades;
   }
-  const studentWithCity = listStudents.filter(
-    (student) => student.location === city
-  );
-  listStudentGrades = studentWithCity.map((student) => {
-    newGrades.forEach((element) => {
-      if (element.studentId === student.id) {
-        student.grade = element.grade;
-      }
+  return listStudents
+    .filter((student) => student.location === city)
+    .map((student) => {
+      const updatedStudent = { ...student };
+      const gradeInfo = newGrades.find(
+        (grade) => grade.studentId === student.id
+      );
+      updatedStudent.grade = gradeInfo ? gradeInfo.grade : 'N/A';
+      return updatedStudent;
     });
-    if (student.grade == null) {
-      student.grade = "N/A";
-    }
-    return student;
-  });
-  return listStudentGrades;
 };
 
 export default updateStudentGradeByCity;
