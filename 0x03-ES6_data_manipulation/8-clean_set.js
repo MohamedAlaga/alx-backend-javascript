@@ -1,12 +1,12 @@
 const cleanSet = (set, startString) => {
-  let strings = '';
-  if (startString === '' || typeof startString !== 'string') return '';
+  let strings = "";
+  if (startString === "" || typeof startString !== "string") return "";
   strings = Array.from(set)
     .filter((str) => {
-      return str.toString().startsWith(startString);
+      return typeof str === "string" && str.startsWith(startString);
     })
-    .map((str) => str.replace(startString, ''))
-    .join('-');
+    .map((str) => str.replace(startString, ""))
+    .join("-");
   return strings;
 };
 
