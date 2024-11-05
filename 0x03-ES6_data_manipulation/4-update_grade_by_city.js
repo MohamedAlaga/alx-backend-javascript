@@ -1,6 +1,6 @@
 const updateStudentGradeByCity = (listStudents, city, newGrades) => {
   let listStudentGrades = [];
-  if (!Array.isArray(listStudentGrades)) {
+  if (!Array.isArray(listStudents)) {
     return listStudentGrades;
   }
   const studentWithCity = listStudents.filter(
