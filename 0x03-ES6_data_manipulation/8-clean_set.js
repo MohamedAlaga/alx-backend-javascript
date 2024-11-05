@@ -1,6 +1,6 @@
 const cleanSet = (set, startString) => {
   let strings = '';
-  if (startString === '') return '';
+  if (startString === '' || typeof startString !== 'string') return '';
   strings = Array.from(set)
     .filter((str) => {
       return str.toString().startsWith(startString);
