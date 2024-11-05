@@ -3,7 +3,7 @@ const getStudentIdsSum = (getListStudents) => {
   if (!Array.isArray(getListStudents)) {
     return studentsTotal;
   }
-  let studentIds = getListStudents.map((student) => student.id);
+  const studentIds = getListStudents.map((student) => student.id);
   studentsTotal = studentIds.reduce((ids, value) => ids + value);
   return studentsTotal;
 };
