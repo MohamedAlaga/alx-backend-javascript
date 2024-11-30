@@ -1,4 +1,4 @@
-import { readDatabase } from '../utils.js';
+import { readDatabase } from '../utils';
 // const readDatabase = require('../utils.js');
 // import readDatabase from '../utils.js';
 
@@ -31,9 +31,7 @@ export default class StudentsController {
     }
     try {
       const fields = await readDatabase(req.app.locals.dbFilePath);
-      const students = fields[major]
-        ? fields[major].map((name) => name.split(' ')[0])
-        : [];
+      const students = fields[major] ? fields[major].map((name) => name.split(' ')[0]) : [];
       res.status(200).send(`List: ${students.join(', ')}`);
     } catch (err) {
       res.status(500).send('Cannot load the database');
