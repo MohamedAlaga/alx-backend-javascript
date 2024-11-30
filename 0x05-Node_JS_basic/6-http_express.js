@@ -1,4 +1,4 @@
-const express = require("express");
+const express = require('express');
 
 /**
  * Creates an HTTP server using Express module.
@@ -9,7 +9,7 @@ const app = express();
 const PORT = 1245;
 
 /**
- * Sends "Hello Holberton School!" response for the root endpoint.
+ * Sends 'Hello Holberton School!' response for the root endpoint.
  * @name GET /
  * @function
  * @memberof module:4-http-express
@@ -17,8 +17,8 @@ const PORT = 1245;
  * @param {Object} res - Express response object
  * @returns {undefined}
  */
-app.get("/", (req, res) => {
-  res.send("Hello Holberton School!");
+app.get('/', (req, res) => {
+  res.send('Hello Holberton School!');
 });
 
 /**
