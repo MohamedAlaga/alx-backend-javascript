@@ -1,4 +1,4 @@
-import { readDatabase } from '../utils';
+import { readDatabase } from '../utils.js';
 // const readDatabase = require('../utils.js');
 // import readDatabase from '../utils.js';
 
