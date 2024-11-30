@@ -1,40 +1,30 @@
-import { readDatabase } from '../utils';
-// const readDatabase = require('../utils.js');
-// import readDatabase from '../utils.js';
+const readDatabase = require('../utils');
 
-export default class StudentsController {
-  static async getAllStudents(req, res) {
-    try {
-      const dbFilePath = process.argv[2]; // Get file path from command line argument
-      const fields = await readDatabase(dbFilePath);
-      const fieldsSorted = Object.keys(fields).sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
-      const lines = [
-        'This is the list of our students',
-        ...fieldsSorted.map((field) => {
-          const students = fields[field].sort();
-          return `Number of students in ${field}: ${
-            students.length
-          }. List: ${students.join(', ')}`;
-        }),
-      ];
-      res.status(200).send(lines.join('\n'));
-    } catch (err) {
-      res.status(500).send('Cannot load the database');
-    }
+class StudentsController {
+  static getAllStudents(request, response) {
+    readDatabase(process.argv[2])
+      .then((data) => {
+        const printData = [];
+        printData.push('This is the list of our students');
+        for (const field in data) {
+          if (field) printData.push(`Number of students in ${field}: ${data[field].number}. ${data[field].list}`);
+        }
+        response.send(printData.join('\n'));
+      })
+      .catch((err) => { response.send(err.message); });
   }
 
-  static async getAllStudentsByMajor(req, res) {
-    const major = req.params.major.toUpperCase();
-    if (major !== 'CS' && major !== 'SWE') {
-      res.status(500).send('Major parameter must be CS or SWE');
-      return;
-    }
-    try {
-      const fields = await readDatabase(req.app.locals.dbFilePath);
-      const students = fields[major] ? fields[major].map((name) => name.split(' ')[0]) : [];
-      res.status(200).send(`List: ${students.join(', ')}`);
-    } catch (err) {
-      res.status(500).send('Cannot load the database');
+  static getAllStudentsByMajor(request, response) {
+    if (!['SWE', 'CS'].includes(request.params.major)) response.status(500).send('Major parameter must be CS or SWE');
+    else {
+      readDatabase(process.argv[2])
+        .then((data) => {
+          if (Object.keys(data).length > 0) response.send(data[request.params.major].list);
+          response.send(500, 'Cannot load the database');
+        })
+        .catch((err) => { response.send(err.message); });
     }
   }
 }
+
+module.exports = StudentsController;
