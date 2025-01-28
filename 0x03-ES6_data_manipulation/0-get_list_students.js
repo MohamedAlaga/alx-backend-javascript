@@ -1,13 +1,19 @@
-const cleanSet = (set, startString) => {
-  const strings = [];
+const getListStudents = () => [
+  {
+    id: 1,
+    firstName: 'Guillaume',
+    location: 'San Francisco',
+  },
+  {
+    id: 2,
+    firstName: 'James',
+    location: 'Columbia',
+  },
+  {
+    id: 5,
+    firstName: 'Serena',
+    location: 'San Francisco',
+  },
+];
 
-  if (startString === '' || typeof startString !== 'string') return '';
-  set.forEach((s) => {
-    if (typeof s === 'string' && s.startsWith(startString)) {
-      strings.push(s.slice(startString.length));
-    }
-  });
-  return strings.join('-');
-};
-
-export default cleanSet;
+export default getListStudents;

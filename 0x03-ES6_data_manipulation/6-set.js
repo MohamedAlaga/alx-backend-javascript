@@ -1,3 +1,3 @@
-const setFromArray = (array) => new Set(array);
+const setFromArray = (arr) => new Set(arr);
 
 export default setFromArray;
